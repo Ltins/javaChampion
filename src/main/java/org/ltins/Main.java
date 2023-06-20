@@ -14,6 +14,8 @@ public class Main {
 
             DBConnection oleg = new DBConnection("root",password, "oleg");
 
+            oleg.insertRow("employees", 1);
+
             oleg.printTables();
             oleg.printTable("employees");
             oleg.printTableInfo("employees");

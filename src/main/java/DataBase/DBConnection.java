@@ -16,11 +16,9 @@ public class DBConnection {
         }
     }
     public void printTable(String tableName){
-        ResultSet table;
-        Statement statement;
         try {
-            statement = connection.createStatement();
-            table = statement.executeQuery("select * from " + tableName);
+            Statement statement = connection.createStatement();
+            ResultSet table = statement.executeQuery("select * from " + tableName);
 
             ResultSetMetaData metaData = table.getMetaData();
             int columnCount = metaData.getColumnCount();
@@ -44,11 +42,9 @@ public class DBConnection {
         }
     }
     public void printTableInfo(String tableName){
-        ResultSet table;
-        Statement statement;
         try {
-            statement = connection.createStatement();
-            table = statement.executeQuery("select * from " + tableName);
+            Statement statement = connection.createStatement();
+            ResultSet table = statement.executeQuery("select * from " + tableName);
 
             ResultSetMetaData metaData = table.getMetaData();
             int columnCount = metaData.getColumnCount();
@@ -78,11 +74,9 @@ public class DBConnection {
     }
     public void printTables()
     {
-        ResultSet tables;
-        Statement statement;
         try {
-            statement = connection.createStatement();
-            tables = statement.executeQuery("SHOW TABLES");
+            Statement statement = connection.createStatement();
+            ResultSet tables = statement.executeQuery("SHOW TABLES");
 
             System.out.println("Tables in the current database: ");
             int i = 1;
@@ -94,6 +88,62 @@ public class DBConnection {
 
             tables.close();
             statement.close();
+        }catch(SQLException throwables) {
+            throwables.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    public void updateInt(final String tableName, final int rowIndex, final int columnIndex, int newValue)
+    {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM " + tableName,
+                    ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet tables = preparedStatement.executeQuery();
+
+            tables.absolute(rowIndex);
+            tables.updateInt(columnIndex, newValue);
+            tables.updateRow();
+
+            tables.close();
+            preparedStatement.close();
+        }catch(SQLException throwables) {
+            throwables.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    public void insertRow(final String tableName, final int previousRowIndex)
+    {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM " + tableName,
+                    ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet tables = preparedStatement.executeQuery();
+
+            tables.absolute(previousRowIndex);
+            tables.moveToInsertRow();
+            tables.insertRow();
+
+            tables.close();
+            preparedStatement.close();
+        }catch(SQLException throwables) {
+            throwables.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    public void deleteRow(final String tableName, final int rowIndex)
+    {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM " + tableName,
+                    ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet tables = preparedStatement.executeQuery();
+
+            tables.absolute(rowIndex);
+            tables.deleteRow();
+
+            tables.close();
+            preparedStatement.close();
         }catch(SQLException throwables) {
             throwables.printStackTrace();
             throw new RuntimeException();
