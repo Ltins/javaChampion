@@ -25,7 +25,7 @@ public class DBConnection {
 
             System.out.println("Table name: " + metaData.getTableName(1));
             for (int i = 1; i<= columnCount; i++) {
-                System.out.format("%21s", metaData.getColumnName(i) + "|");
+                System.out.format("%21s", "[" + i +"] " + metaData.getColumnName(i) + "|");
             }
             System.out.println("\nTable data:");
             while (table.next()){
@@ -95,13 +95,14 @@ public class DBConnection {
         }
     }
 
-    public ResultSetMetaData getMetaData(final String tableName){
-        ResultSetMetaData result;
+    public String getTableColumnType(final String tableName, final int column){
+        String result = "";
         try {
             Statement statement = connection.createStatement();
             ResultSet table = statement.executeQuery("select * from " + tableName);
 
-            result = table.getMetaData();
+            ResultSetMetaData metaData = table.getMetaData();
+            result = metaData.getColumnTypeName(column);
 
             table.close();
             statement.close();
@@ -149,7 +150,7 @@ public class DBConnection {
             throw new RuntimeException();
         }
     }
-    public void updateTimestamp(final String tableName, final int rowIndex, final int columnIndex, final Timestamp newValue)
+    public void updateTimestamp(final String tableName, final int rowIndex, final int columnIndex, final long newValue)
     {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM " + tableName,
@@ -157,7 +158,9 @@ public class DBConnection {
             ResultSet tables = preparedStatement.executeQuery();
 
             tables.absolute(rowIndex);
-            tables.updateTimestamp(columnIndex, newValue);
+            Timestamp timestamp = new Timestamp(newValue);
+            System.out.println("oleg");
+            tables.updateTimestamp(columnIndex, timestamp);
             tables.updateRow();
 
             tables.close();
