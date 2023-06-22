@@ -12,9 +12,10 @@ public class DBConnection {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + URLIndex, userName, password);
         }catch(SQLException throwables) {
             throwables.printStackTrace();
-            throw new RuntimeException();
+            //throw new RuntimeException();
         }
     }
+
     public void printTable(String tableName){
         try {
             Statement statement = connection.createStatement();
@@ -39,7 +40,7 @@ public class DBConnection {
             statement.close();
         }catch(SQLException throwables) {
             throwables.printStackTrace();
-            throw new RuntimeException();
+            //throw new RuntimeException();
         }
     }
     public void printTableInfo(String tableName){
@@ -70,7 +71,7 @@ public class DBConnection {
             statement.close();
         }catch(SQLException throwables) {
             throwables.printStackTrace();
-            throw new RuntimeException();
+            //throw new RuntimeException();
         }
     }
     public void printTables()
@@ -91,7 +92,7 @@ public class DBConnection {
             statement.close();
         }catch(SQLException throwables) {
             throwables.printStackTrace();
-            throw new RuntimeException();
+            //throw new RuntimeException();
         }
     }
 
@@ -108,7 +109,7 @@ public class DBConnection {
             statement.close();
         }catch(SQLException throwables) {
             throwables.printStackTrace();
-            throw new RuntimeException();
+            //throw new RuntimeException();
         }
         return result;
     }
@@ -128,7 +129,7 @@ public class DBConnection {
             preparedStatement.close();
         }catch(SQLException throwables) {
             throwables.printStackTrace();
-            throw new RuntimeException();
+            //throw new RuntimeException();
         }
     }
 
@@ -147,7 +148,7 @@ public class DBConnection {
             preparedStatement.close();
         }catch(SQLException throwables) {
             throwables.printStackTrace();
-            throw new RuntimeException();
+            //throw new RuntimeException();
         }
     }
     public void updateTimestamp(final String tableName, final int rowIndex, final int columnIndex, final long newValue)
@@ -167,7 +168,7 @@ public class DBConnection {
             preparedStatement.close();
         }catch(SQLException throwables) {
             throwables.printStackTrace();
-            throw new RuntimeException();
+            //throw new RuntimeException();
         }
     }
     public void insertRow(final String tableName, final int previousRowIndex)
@@ -185,7 +186,7 @@ public class DBConnection {
             preparedStatement.close();
         }catch(SQLException throwables) {
             throwables.printStackTrace();
-            throw new RuntimeException();
+            //throw new RuntimeException();
         }
     }
 
@@ -208,7 +209,7 @@ public class DBConnection {
             statement.close();
         }catch(SQLException throwables) {
             throwables.printStackTrace();
-            throw new RuntimeException();
+            //throw new RuntimeException();
         }
         return result;
     }
@@ -227,7 +228,7 @@ public class DBConnection {
             preparedStatement.close();
         }catch(SQLException throwables) {
             throwables.printStackTrace();
-            throw new RuntimeException();
+            //throw new RuntimeException();
         }
     }
 }
