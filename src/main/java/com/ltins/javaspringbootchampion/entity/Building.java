@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 public class Building {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int building_id;
+    private Integer building_id;
     @Column(length = 255, nullable = false)
     private String address;
     //@Column(name = "CURRENT_TIMESTAMP")
@@ -40,11 +40,20 @@ public class Building {
         this.rent_date = rent_date;
     }
 
-    public int getArea() {
+    public Integer getArea() {
         return area;
     }
 
-    public void setArea(int area) {
+    public void setArea(Integer area) {
         this.area = area;
+    }
+    @Override
+    public String toString() {
+        return "Building{" +
+                "building_id=" + building_id +
+                ", address='" + address + '\'' +
+                ", rent_date=" + rent_date +
+                ", area=" + area +
+                '}';
     }
 }

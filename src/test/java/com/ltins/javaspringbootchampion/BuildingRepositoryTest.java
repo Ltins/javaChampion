@@ -9,6 +9,7 @@ import org.springframework.test.annotation.Rollback;
 import com.ltins.javaspringbootchampion.repository.*;
 import com.ltins.javaspringbootchampion.entity.*;
 import java.sql.Timestamp;
+import java.util.Optional;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -30,4 +31,33 @@ public class BuildingRepositoryTest {
             Assertions.assertThat(savedBuilding.getBuilding_id()).isGreaterThan(0);
 
     }
+    @Test
+    public void testListAll(){
+      Iterable<Building> buildings = repo.findAll();
+      Assertions.assertThat(buildings).hasSizeGreaterThan(0);
+
+      for (Building building : buildings){
+          System.out.println(building);
+         }
+     }
+    @Test
+    public void testUpdate(){
+        Integer buildingId = 4;
+        Optional<Building> optionalBuilding = repo.findById(buildingId);
+        Building building = optionalBuilding.get();
+        building.setArea(34);
+        repo.save(building);
+
+        Building updatedBuilding = repo.findById(buildingId).get();
+        Assertions.assertThat(updatedBuilding.getArea()).isEqualTo(34);
+     }
+    @Test
+    public void deleteByID(){
+        Integer buildingId = 4;
+        repo.deleteById(buildingId);
+
+        Optional<Building> optionalBuilding = repo.findById(buildingId);
+        Assertions.assertThat(optionalBuilding).isNotPresent();
+    }
+
 }
