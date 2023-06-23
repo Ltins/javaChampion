@@ -1,5 +1,4 @@
 package com.ltins.javaspringbootchampion.service;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ltins.javaspringbootchampion.repository.*;
@@ -9,25 +8,25 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BuildingService {
-    @Autowired private BuildingRepository repo;
+public class EmployeeService {
+    @Autowired private EmployeeRepository repo;
 
-    public List<Building> listAll(){
-        return (List<Building>) repo.findAll();
+    public List<Employee> listAll(){
+        return (List<Employee>) repo.findAll();
     }
 
-    public void save(Building building) {
-        repo.save(building);
+    public void save(Employee employee) {
+        repo.save(employee);
     }
 
-    public Building get(Integer id){
-        Optional<Building> result = repo.findById(id);
+    public Employee get(Integer id){
+        Optional<Employee> result = repo.findById(id);
         if(result.isPresent()){
             return result.get();
         }
         else{
             //throw new BuildinNotFoundException;
-            return new Building();
+            return new Employee();
         }
     }
 

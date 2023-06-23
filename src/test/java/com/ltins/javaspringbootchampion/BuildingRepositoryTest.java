@@ -23,12 +23,12 @@ public class BuildingRepositoryTest {
             Building building = new Building();
             building.setAddress("Krasivsk 305");
             building.setArea(69);
-            building.setRent_date(new Timestamp(1164648983));
+            building.setRentDate(new Timestamp(1164648983));
 
             Building savedBuilding = repo.save(building);
 
             Assertions.assertThat(savedBuilding).isNotNull();
-            Assertions.assertThat(savedBuilding.getBuilding_id()).isGreaterThan(0);
+            Assertions.assertThat(savedBuilding.getId()).isGreaterThan(0);
 
     }
     @Test

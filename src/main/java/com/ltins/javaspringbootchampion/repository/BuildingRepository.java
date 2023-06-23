@@ -4,4 +4,5 @@ import com.ltins.javaspringbootchampion.entity.*;
 import org.springframework.data.repository.CrudRepository;
 
 public interface BuildingRepository extends CrudRepository<Building, Integer> {
+    public Long countById(Integer id);
 }
