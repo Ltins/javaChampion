@@ -19,7 +19,7 @@ public class EmployeeDataTransferObject {
         this.salary = employee.getSalary();
         this.jobTitle = employee.getJobTitle();
         if(employee.getBuilding() == null) {
-            this.buildingAddress = "Homeless :(";
+            this.buildingAddress = "NONE";
         }else {
             this.buildingAddress = employee.getBuilding().getAddress();
         }

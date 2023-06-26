@@ -13,14 +13,14 @@ public class ProductDataTransferObject {
     public ProductDataTransferObject(Product product){
         this.id = product.getId();
         if(product.getBuilding() == null) {
-            this.buildingAddress = "Homeless :(";
+            this.buildingAddress = "NONE";
         }else {
             this.buildingAddress = product.getBuilding().getAddress();
         }
         if(product.getProvider() == null) {
-            this.buildingAddress = "NONE";
+            this.providerName = "NONE";
         }else {
-            this.buildingAddress = product.getProvider().getName();;
+            this.providerName = product.getProvider().getName();;
         }
         this.productName = product.getName();
         this.availability = product.getAvailability();

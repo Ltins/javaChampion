@@ -47,14 +47,14 @@ public class BuildingRepositoryTest {
      }
     @Test
     public void testUpdate(){
-        Integer buildingId = 4;
+        Integer buildingId = 6;
         Optional<Building> optionalBuilding = repo.findById(buildingId);
         Building building = optionalBuilding.get();
-        building.setArea(34);
+        building.setAddress("Changed");
         repo.save(building);
 
         Building updatedBuilding = repo.findById(buildingId).get();
-        Assertions.assertThat(updatedBuilding.getArea()).isEqualTo(34);
+        Assertions.assertThat(updatedBuilding.getAddress()).isEqualTo("Changed");
      }
     @Test
     public void deleteByID(){
