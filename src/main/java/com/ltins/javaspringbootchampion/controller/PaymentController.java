@@ -12,8 +12,9 @@ import java.util.List;
 
 @RestController
 public class PaymentController     {
-    @Autowired
     PaymentService service;
+    @Autowired
+    public PaymentController(PaymentService service){this.service = service;}
 
     @GetMapping("/payments")
     public List<PaymentDataTransferObject> showBuildingList(){

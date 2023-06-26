@@ -12,9 +12,9 @@ import java.util.List;
 
 @RestController
 public class ProductController     {
-    @Autowired
     ProductService service;
-
+    @Autowired
+    public ProductController(ProductService service){this.service = service;}
     @GetMapping("/products")
     public List<ProductDataTransferObject> showBuildingList(){
         List<Product> listBuildings = service.listAll();

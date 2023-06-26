@@ -12,8 +12,9 @@ import java.util.List;
 
 @RestController
 public class SaleController     {
-    @Autowired
     SaleService service;
+    @Autowired
+    public SaleController(SaleService service){this.service = service;}
 
     @GetMapping("/sales")
     public List<SaleDataTransferObject> showBuildingList(){

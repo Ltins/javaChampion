@@ -12,9 +12,9 @@ import java.util.List;
 
 @RestController
 public class ProviderController     {
-    @Autowired
     ProviderService service;
-
+    @Autowired
+    public ProviderController(ProviderService service){this.service = service;}
     @GetMapping("/providers")
     public List<ProviderDataTransferObject> showBuildingList(){
         List<Provider> listBuildings = service.listAll();

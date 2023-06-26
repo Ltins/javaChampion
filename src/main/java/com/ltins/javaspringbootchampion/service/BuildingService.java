@@ -43,4 +43,8 @@ public class BuildingService {
         repo.deleteById(id);
     }
 
+    public void deleteAll(){
+        repo.deleteAll();
+    }
+
 }
