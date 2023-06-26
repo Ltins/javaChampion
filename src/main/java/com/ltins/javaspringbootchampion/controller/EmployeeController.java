@@ -12,12 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/employees")
 public class EmployeeController {
     @Autowired
     EmployeeService service;
 
-    @GetMapping
+    @GetMapping("/employees")
     public List<EmployeeDataTransferObject> showBuildingList(){
         List<Employee> listEmployees = service.listAll();
         List<EmployeeDataTransferObject> listBDTO = new ArrayList();

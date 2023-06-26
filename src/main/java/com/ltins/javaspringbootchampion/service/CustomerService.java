@@ -2,31 +2,30 @@ package com.ltins.javaspringbootchampion.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ltins.javaspringbootchampion.repository.BuildingRepository;
-import com.ltins.javaspringbootchampion.entity.Building;
+import com.ltins.javaspringbootchampion.repository.CustomerRepository;
+import com.ltins.javaspringbootchampion.entity.Customer;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
-public class BuildingService {
+public class CustomerService {
+    private CustomerRepository repo;
 
-    private BuildingRepository repo;
-    @Autowired
-    public BuildingService(BuildingRepository repository){
+    @Autowired CustomerService(CustomerRepository repository){
         this.repo = repository;
     }
-    public List<Building> listAll(){
-        return (List<Building>) repo.findAll();
+    public List<Customer> listAll(){
+        return (List<Customer>) repo.findAll();
     }
 
-    public void save(Building building) {
-        repo.save(building);
+    public void save(Customer customer) {
+        repo.save(customer);
     }
 
-    public Building get(Integer id){
-        Optional<Building> result = repo.findById(id);
+    public Customer get(Integer id){
+        Optional<Customer> result = repo.findById(id);
         if(result.isPresent()){
             return result.get();
         }
@@ -42,5 +41,4 @@ public class BuildingService {
         }
         repo.deleteById(id);
     }
-
 }

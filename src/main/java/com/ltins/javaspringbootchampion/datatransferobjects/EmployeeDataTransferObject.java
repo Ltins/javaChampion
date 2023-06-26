@@ -1,6 +1,6 @@
 package com.ltins.javaspringbootchampion.datatransferobjects;
 
-import com.ltins.javaspringbootchampion.entity.*;
+import com.ltins.javaspringbootchampion.entity.Employee;
 
 import java.text.SimpleDateFormat;
 

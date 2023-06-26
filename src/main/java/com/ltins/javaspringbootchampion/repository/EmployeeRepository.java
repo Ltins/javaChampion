@@ -1,6 +1,6 @@
 package com.ltins.javaspringbootchampion.repository;
 
-import com.ltins.javaspringbootchampion.entity.*;
+import com.ltins.javaspringbootchampion.entity.Employee;
 import jakarta.transaction.Transactional;
 import org.springframework.data.repository.CrudRepository;
 

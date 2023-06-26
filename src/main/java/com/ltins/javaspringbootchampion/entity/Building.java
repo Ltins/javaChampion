@@ -2,8 +2,6 @@ package com.ltins.javaspringbootchampion.entity;
 
 import jakarta.persistence.*;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "buildings")
@@ -16,7 +14,7 @@ public class Building {
     private String address;
     @Column(name = "rent_date", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp rentDate;
-    @Column(name = "area", columnDefinition="INT")
+    @Column(name = "area", columnDefinition="INT DEFAULT 300")
     private Integer area;
 
     public Integer getId() {

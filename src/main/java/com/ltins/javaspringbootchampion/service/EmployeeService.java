@@ -1,18 +1,19 @@
 package com.ltins.javaspringbootchampion.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ltins.javaspringbootchampion.repository.*;
-import com.ltins.javaspringbootchampion.entity.*;
+import com.ltins.javaspringbootchampion.repository.EmployeeRepository;
+import com.ltins.javaspringbootchampion.entity.Employee;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
 public class EmployeeService {
     private EmployeeRepository repo;
     @Autowired
-    public EmployeeService(EmployeeRepository repo){
-        this.repo = repo;
+    public EmployeeService(EmployeeRepository repository){
+        this.repo = repository;
     }
 
     public List<Employee> listAll(){
@@ -29,15 +30,14 @@ public class EmployeeService {
             return result.get();
         }
         else{
-            //throw new BuildinNotFoundException;
-            return new Employee();
+            throw new NoSuchElementException("No such element");
         }
     }
 
     public void delete(Integer id){
         Long count = repo.countById(id);
         if(count == null || count == 0){
-            //throw new BuildingNotFoundException();
+            throw new NoSuchElementException("No such element");
         }
         repo.deleteById(id);
     }

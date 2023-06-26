@@ -20,7 +20,7 @@ public class Employee {
     @Column(name = "hire_date", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp hireDate;
 
-    @Column(name = "salary", columnDefinition = "INT")
+    @Column(name = "salary", columnDefinition = "INT DEFAULT 100")
     private Integer salary;
 
     @Column(length = 255, nullable = false, name = "job_title", columnDefinition = "VARCHAR(255) default 'worker'")

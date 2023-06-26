@@ -1,8 +1,8 @@
 package com.ltins.javaspringbootchampion.repository;
 
-import com.ltins.javaspringbootchampion.entity.Building;
+import com.ltins.javaspringbootchampion.entity.Payment;
 import org.springframework.data.repository.CrudRepository;
 
-public interface BuildingRepository extends CrudRepository<Building, Integer> {
+public interface PaymentRepository extends CrudRepository<Payment, Integer> {
     public Long countById(Integer id);
 }

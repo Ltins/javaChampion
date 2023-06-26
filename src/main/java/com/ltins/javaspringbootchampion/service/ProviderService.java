@@ -1,32 +1,32 @@
 package com.ltins.javaspringbootchampion.service;
 
+import com.ltins.javaspringbootchampion.entity.Provider;
+import com.ltins.javaspringbootchampion.repository.ProviderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ltins.javaspringbootchampion.repository.BuildingRepository;
-import com.ltins.javaspringbootchampion.entity.Building;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
-public class BuildingService {
-
-    private BuildingRepository repo;
+public class ProviderService {
+    private ProviderRepository repo;
     @Autowired
-    public BuildingService(BuildingRepository repository){
+    public ProviderService(ProviderRepository repository){
         this.repo = repository;
     }
-    public List<Building> listAll(){
-        return (List<Building>) repo.findAll();
+
+    public List<Provider> listAll(){
+        return (List<Provider>) repo.findAll();
     }
 
-    public void save(Building building) {
-        repo.save(building);
+    public void save(Provider payment) {
+        repo.save(payment);
     }
 
-    public Building get(Integer id){
-        Optional<Building> result = repo.findById(id);
+    public Provider get(Integer id){
+        Optional<Provider> result = repo.findById(id);
         if(result.isPresent()){
             return result.get();
         }
