@@ -9,7 +9,11 @@ import java.util.Optional;
 
 @Service
 public class EmployeeService {
-    @Autowired private EmployeeRepository repo;
+    private EmployeeRepository repo;
+    @Autowired
+    public EmployeeService(EmployeeRepository repo){
+        this.repo = repo;
+    }
 
     public List<Employee> listAll(){
         return (List<Employee>) repo.findAll();

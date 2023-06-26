@@ -12,22 +12,22 @@ import java.sql.Timestamp;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_id")
+    @Column(name = "employee_id", columnDefinition = "INT")
     private Integer id;
-    @Column(length = 255, nullable = false, name = "name")
+    @Column(length = 255, nullable = false, name = "name", columnDefinition = "VARCHAR(255) DEFAULT 'oleg'")
     private String name;
 
-    @Column(name = "hire_date")
+    @Column(name = "hire_date", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp hireDate;
 
-    @Column(name = "salary")
+    @Column(name = "salary", columnDefinition = "INT")
     private Integer salary;
 
-    @Column(length = 255, nullable = false, name = "job_title")
+    @Column(length = 255, nullable = false, name = "job_title", columnDefinition = "VARCHAR(255) default 'worker'")
     private String jobTitle;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "building_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "building_id", nullable = true)
     @OnDelete(action = OnDeleteAction.SET_NULL)
     @JsonIgnore
     private Building building;

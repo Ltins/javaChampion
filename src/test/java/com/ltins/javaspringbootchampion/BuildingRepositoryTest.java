@@ -15,8 +15,13 @@ import java.util.Optional;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(false)
 public class BuildingRepositoryTest {
-    @Autowired
+
     private BuildingRepository repo;
+
+    @Autowired
+    public BuildingRepositoryTest(BuildingRepository repo){
+        this.repo = repo;
+    }
 
     @Test
     public void testAddNew(){
