@@ -18,7 +18,7 @@ public class BuildingController     {
     public BuildingController(BuildingService service){this.service = service;}
 
     @GetMapping("/buildings")
-    public ResponseEntity<List<BuildingDataTransferObject>> showBuildingList(){
+    public ResponseEntity<List<BuildingDataTransferObject>> showBuildingsList(){
         List<Building> listBuildings = service.listAll();
         List<BuildingDataTransferObject> listDTO = new ArrayList<BuildingDataTransferObject>();
         for(Building building : listBuildings){
@@ -43,7 +43,7 @@ public class BuildingController     {
     }
 
     @DeleteMapping("/buildings/{id}")
-    public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") Integer id) {
+    public ResponseEntity<HttpStatus> deleteBuilding(@PathVariable("id") Integer id) {
         try {
             service.delete(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -52,7 +52,7 @@ public class BuildingController     {
         }
     }
     @DeleteMapping("/buildings")
-    public ResponseEntity<HttpStatus> deleteAllTutorials() {
+    public ResponseEntity<HttpStatus> deleteAllBuildings() {
         try {
             service.deleteAll();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

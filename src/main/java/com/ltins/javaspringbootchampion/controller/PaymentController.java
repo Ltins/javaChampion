@@ -18,7 +18,7 @@ public class PaymentController     {
     public PaymentController(PaymentService service){this.service = service;}
 
     @GetMapping("/payments")
-    public ResponseEntity<List<PaymentDataTransferObject>> showBuildingList(){
+    public ResponseEntity<List<PaymentDataTransferObject>> showPaymentsList(){
         List<Payment> listPayments = service.listAll();
         List<PaymentDataTransferObject> listDTO = new ArrayList<PaymentDataTransferObject>();
         for(Payment payment : listPayments){
@@ -27,23 +27,23 @@ public class PaymentController     {
         return new ResponseEntity<>(listDTO, HttpStatus.OK);
     }
     @GetMapping("/payments/{id}")
-    public ResponseEntity<PaymentDataTransferObject> getBuildingById(@PathVariable("id") Integer id) {
+    public ResponseEntity<PaymentDataTransferObject> getPaymentById(@PathVariable("id") Integer id) {
         Payment payment = service.get(id);
         return new ResponseEntity<>(new PaymentDataTransferObject(payment), HttpStatus.OK);
     }
     @PostMapping("/payments")
-    public ResponseEntity<PaymentDataTransferObject> createBuilding(@RequestBody Payment payment) {
+    public ResponseEntity<PaymentDataTransferObject> createPayment(@RequestBody Payment payment) {
         service.save(payment);
         return new ResponseEntity<>(new PaymentDataTransferObject(payment), HttpStatus.CREATED);
     }
     @PutMapping("/payments/{id}")
-    public ResponseEntity<HttpStatus> updateBuilding(@RequestBody Payment payment) {
+    public ResponseEntity<HttpStatus> updatePayment(@RequestBody Payment payment) {
         service.save(payment);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/payments/{id}")
-    public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") Integer id) {
+    public ResponseEntity<HttpStatus> deletePayment(@PathVariable("id") Integer id) {
         try {
             service.delete(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -52,7 +52,7 @@ public class PaymentController     {
         }
     }
     @DeleteMapping("/payments")
-    public ResponseEntity<HttpStatus> deleteAllTutorials() {
+    public ResponseEntity<HttpStatus> deleteAllPayments() {
         try {
             service.deleteAll();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

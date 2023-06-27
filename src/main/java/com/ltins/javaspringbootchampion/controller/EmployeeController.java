@@ -18,7 +18,7 @@ public class EmployeeController     {
     public EmployeeController(EmployeeService service){this.service = service;}
 
     @GetMapping("/employees")
-    public ResponseEntity<List<EmployeeDataTransferObject>> showBuildingList(){
+    public ResponseEntity<List<EmployeeDataTransferObject>> showEmployeesList(){
         List<Employee> listEmployees = service.listAll();
         List<EmployeeDataTransferObject> listDTO = new ArrayList<EmployeeDataTransferObject>();
         for(Employee employee : listEmployees){
@@ -27,23 +27,23 @@ public class EmployeeController     {
         return new ResponseEntity<>(listDTO, HttpStatus.OK);
     }
     @GetMapping("/employees/{id}")
-    public ResponseEntity<EmployeeDataTransferObject> getBuildingById(@PathVariable("id") Integer id) {
+    public ResponseEntity<EmployeeDataTransferObject> getEmployeeById(@PathVariable("id") Integer id) {
         Employee employee = service.get(id);
         return new ResponseEntity<>(new EmployeeDataTransferObject(employee), HttpStatus.OK);
     }
     @PostMapping("/employees")
-    public ResponseEntity<EmployeeDataTransferObject> createBuilding(@RequestBody Employee employee) {
+    public ResponseEntity<EmployeeDataTransferObject> createEmployee(@RequestBody Employee employee) {
         service.save(employee);
         return new ResponseEntity<>(new EmployeeDataTransferObject(employee), HttpStatus.CREATED);
     }
     @PutMapping("/employees/{id}")
-    public ResponseEntity<HttpStatus> updateBuilding(@RequestBody Employee employee) {
+    public ResponseEntity<HttpStatus> updateEmployee(@RequestBody Employee employee) {
         service.save(employee);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/employees/{id}")
-    public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") Integer id) {
+    public ResponseEntity<HttpStatus> deleteEmployee(@PathVariable("id") Integer id) {
         try {
             service.delete(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -52,7 +52,7 @@ public class EmployeeController     {
         }
     }
     @DeleteMapping("/employees")
-    public ResponseEntity<HttpStatus> deleteAllTutorials() {
+    public ResponseEntity<HttpStatus> deleteAllEmployees() {
         try {
             service.deleteAll();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -18,7 +18,7 @@ public class ProductController     {
     public ProductController(ProductService service){this.service = service;}
 
     @GetMapping("/products")
-    public ResponseEntity<List<ProductDataTransferObject>> showBuildingList(){
+    public ResponseEntity<List<ProductDataTransferObject>> showProductsList(){
         List<Product> listProducts = service.listAll();
         List<ProductDataTransferObject> listDTO = new ArrayList<ProductDataTransferObject>();
         for(Product product : listProducts){
@@ -27,23 +27,23 @@ public class ProductController     {
         return new ResponseEntity<>(listDTO, HttpStatus.OK);
     }
     @GetMapping("/products/{id}")
-    public ResponseEntity<ProductDataTransferObject> getBuildingById(@PathVariable("id") Integer id) {
+    public ResponseEntity<ProductDataTransferObject> getProductById(@PathVariable("id") Integer id) {
         Product product = service.get(id);
         return new ResponseEntity<>(new ProductDataTransferObject(product), HttpStatus.OK);
     }
     @PostMapping("/products")
-    public ResponseEntity<ProductDataTransferObject> createBuilding(@RequestBody Product product) {
+    public ResponseEntity<ProductDataTransferObject> createProduct(@RequestBody Product product) {
         service.save(product);
         return new ResponseEntity<>(new ProductDataTransferObject(product), HttpStatus.CREATED);
     }
     @PutMapping("/products/{id}")
-    public ResponseEntity<HttpStatus> updateBuilding(@RequestBody Product product) {
+    public ResponseEntity<HttpStatus> updateProduct(@RequestBody Product product) {
         service.save(product);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/products/{id}")
-    public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") Integer id) {
+    public ResponseEntity<HttpStatus> deleteProduct(@PathVariable("id") Integer id) {
         try {
             service.delete(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -52,7 +52,7 @@ public class ProductController     {
         }
     }
     @DeleteMapping("/products")
-    public ResponseEntity<HttpStatus> deleteAllTutorials() {
+    public ResponseEntity<HttpStatus> deleteAllProducts() {
         try {
             service.deleteAll();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

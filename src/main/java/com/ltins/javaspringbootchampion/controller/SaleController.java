@@ -18,7 +18,7 @@ public class SaleController     {
     public SaleController(SaleService service){this.service = service;}
 
     @GetMapping("/sales")
-    public ResponseEntity<List<SaleDataTransferObject>> showBuildingList(){
+    public ResponseEntity<List<SaleDataTransferObject>> showSalesList(){
         List<Sale> listSales = service.listAll();
         List<SaleDataTransferObject> listDTO = new ArrayList<SaleDataTransferObject>();
         for(Sale sale : listSales){
@@ -27,23 +27,23 @@ public class SaleController     {
         return new ResponseEntity<>(listDTO, HttpStatus.OK);
     }
     @GetMapping("/sales/{id}")
-    public ResponseEntity<SaleDataTransferObject> getBuildingById(@PathVariable("id") Integer id) {
+    public ResponseEntity<SaleDataTransferObject> getSaleById(@PathVariable("id") Integer id) {
         Sale sale = service.get(id);
         return new ResponseEntity<>(new SaleDataTransferObject(sale), HttpStatus.OK);
     }
     @PostMapping("/sales")
-    public ResponseEntity<SaleDataTransferObject> createBuilding(@RequestBody Sale sale) {
+    public ResponseEntity<SaleDataTransferObject> createSale(@RequestBody Sale sale) {
         service.save(sale);
         return new ResponseEntity<>(new SaleDataTransferObject(sale), HttpStatus.CREATED);
     }
     @PutMapping("/sales/{id}")
-    public ResponseEntity<HttpStatus> updateBuilding(@RequestBody Sale sale) {
+    public ResponseEntity<HttpStatus> updateSale(@RequestBody Sale sale) {
         service.save(sale);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/sales/{id}")
-    public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") Integer id) {
+    public ResponseEntity<HttpStatus> deleteSale(@PathVariable("id") Integer id) {
         try {
             service.delete(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -52,7 +52,7 @@ public class SaleController     {
         }
     }
     @DeleteMapping("/sales")
-    public ResponseEntity<HttpStatus> deleteAllTutorials() {
+    public ResponseEntity<HttpStatus> deleteAllSales() {
         try {
             service.deleteAll();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

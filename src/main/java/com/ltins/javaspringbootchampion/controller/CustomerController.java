@@ -18,7 +18,7 @@ public class CustomerController     {
     public CustomerController(CustomerService service){this.service = service;}
 
     @GetMapping("/customers")
-    public ResponseEntity<List<CustomerDataTransferObject>> showBuildingList(){
+    public ResponseEntity<List<CustomerDataTransferObject>> showCustomersList(){
         List<Customer> listCustomers = service.listAll();
         List<CustomerDataTransferObject> listDTO = new ArrayList<CustomerDataTransferObject>();
         for(Customer customer : listCustomers){
@@ -27,23 +27,23 @@ public class CustomerController     {
         return new ResponseEntity<>(listDTO, HttpStatus.OK);
     }
     @GetMapping("/customers/{id}")
-    public ResponseEntity<CustomerDataTransferObject> getBuildingById(@PathVariable("id") Integer id) {
+    public ResponseEntity<CustomerDataTransferObject> getCustomerById(@PathVariable("id") Integer id) {
         Customer customer = service.get(id);
         return new ResponseEntity<>(new CustomerDataTransferObject(customer), HttpStatus.OK);
     }
     @PostMapping("/customers")
-    public ResponseEntity<CustomerDataTransferObject> createBuilding(@RequestBody Customer customer) {
+    public ResponseEntity<CustomerDataTransferObject> createCustomer(@RequestBody Customer customer) {
         service.save(customer);
         return new ResponseEntity<>(new CustomerDataTransferObject(customer), HttpStatus.CREATED);
     }
     @PutMapping("/customers/{id}")
-    public ResponseEntity<HttpStatus> updateBuilding(@RequestBody Customer customer) {
+    public ResponseEntity<HttpStatus> updateCustomer(@RequestBody Customer customer) {
         service.save(customer);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/customers/{id}")
-    public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") Integer id) {
+    public ResponseEntity<HttpStatus> deleteCustomer(@PathVariable("id") Integer id) {
         try {
             service.delete(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -52,7 +52,7 @@ public class CustomerController     {
         }
     }
     @DeleteMapping("/customers")
-    public ResponseEntity<HttpStatus> deleteAllTutorials() {
+    public ResponseEntity<HttpStatus> deleteAllCustomers() {
         try {
             service.deleteAll();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
