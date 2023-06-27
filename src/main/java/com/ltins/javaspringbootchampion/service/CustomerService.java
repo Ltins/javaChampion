@@ -41,4 +41,7 @@ public class CustomerService {
         }
         repo.deleteById(id);
     }
+    public void deleteAll(){
+        repo.deleteAll();
+    }
 }

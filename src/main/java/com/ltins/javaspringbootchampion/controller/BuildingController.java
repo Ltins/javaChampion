@@ -18,18 +18,18 @@ public class BuildingController     {
     public BuildingController(BuildingService service){this.service = service;}
 
     @GetMapping("/buildings")
-    public List<BuildingDataTransferObject> showBuildingList(){
+    public ResponseEntity<List<BuildingDataTransferObject>> showBuildingList(){
         List<Building> listBuildings = service.listAll();
-        List<BuildingDataTransferObject> listBDTO = new ArrayList<BuildingDataTransferObject>();
+        List<BuildingDataTransferObject> listDTO = new ArrayList<BuildingDataTransferObject>();
         for(Building building : listBuildings){
-            listBDTO.add(new BuildingDataTransferObject(building));
+            listDTO.add(new BuildingDataTransferObject(building));
         }
-        return listBDTO;
+        return new ResponseEntity<>(listDTO, HttpStatus.OK);
     }
     @GetMapping("/buildings/{id}")
-    public BuildingDataTransferObject getBuildingById(@PathVariable("id") Integer id) {
+    public ResponseEntity<BuildingDataTransferObject> getBuildingById(@PathVariable("id") Integer id) {
         Building building = service.get(id);
-        return new BuildingDataTransferObject(building);
+        return new ResponseEntity<>(new BuildingDataTransferObject(building), HttpStatus.OK);
     }
     @PostMapping("/buildings")
     public ResponseEntity<BuildingDataTransferObject> createBuilding(@RequestBody Building building) {

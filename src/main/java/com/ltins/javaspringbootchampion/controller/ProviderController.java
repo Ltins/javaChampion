@@ -4,8 +4,9 @@ import com.ltins.javaspringbootchampion.datatransferobjects.ProviderDataTransfer
 import com.ltins.javaspringbootchampion.entity.Provider;
 import com.ltins.javaspringbootchampion.service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +16,48 @@ public class ProviderController     {
     ProviderService service;
     @Autowired
     public ProviderController(ProviderService service){this.service = service;}
+
     @GetMapping("/providers")
-    public List<ProviderDataTransferObject> showBuildingList(){
-        List<Provider> listBuildings = service.listAll();
-        List<ProviderDataTransferObject> listBDTO = new ArrayList<ProviderDataTransferObject>();
-        for(Provider provider : listBuildings){
-            listBDTO.add(new ProviderDataTransferObject(provider));
+    public ResponseEntity<List<ProviderDataTransferObject>> showBuildingList(){
+        List<Provider> listProviders = service.listAll();
+        List<ProviderDataTransferObject> listDTO = new ArrayList<ProviderDataTransferObject>();
+        for(Provider provider : listProviders){
+            listDTO.add(new ProviderDataTransferObject(provider));
         }
-        return listBDTO;
+        return new ResponseEntity<>(listDTO, HttpStatus.OK);
+    }
+    @GetMapping("/providers/{id}")
+    public ResponseEntity<ProviderDataTransferObject> getBuildingById(@PathVariable("id") Integer id) {
+        Provider provider = service.get(id);
+        return new ResponseEntity<>(new ProviderDataTransferObject(provider), HttpStatus.OK);
+    }
+    @PostMapping("/providers")
+    public ResponseEntity<ProviderDataTransferObject> createBuilding(@RequestBody Provider provider) {
+        service.save(provider);
+        return new ResponseEntity<>(new ProviderDataTransferObject(provider), HttpStatus.CREATED);
+    }
+    @PutMapping("/providers/{id}")
+    public ResponseEntity<HttpStatus> updateBuilding(@RequestBody Provider provider) {
+        service.save(provider);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/providers/{id}")
+    public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") Integer id) {
+        try {
+            service.delete(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @DeleteMapping("/providers")
+    public ResponseEntity<HttpStatus> deleteAllTutorials() {
+        try {
+            service.deleteAll();
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

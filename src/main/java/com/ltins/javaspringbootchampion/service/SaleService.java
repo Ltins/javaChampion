@@ -42,5 +42,7 @@ public class SaleService {
         }
         repo.deleteById(id);
     }
-
+    public void deleteAll(){
+        repo.deleteAll();
+    }
 }

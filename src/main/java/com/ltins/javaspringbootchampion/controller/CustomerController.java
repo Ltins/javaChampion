@@ -4,8 +4,9 @@ import com.ltins.javaspringbootchampion.datatransferobjects.CustomerDataTransfer
 import com.ltins.javaspringbootchampion.entity.Customer;
 import com.ltins.javaspringbootchampion.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,15 +15,49 @@ import java.util.List;
 public class CustomerController     {
     CustomerService service;
     @Autowired
-    public CustomerController(CustomerService service) {this.service = service;}
+    public CustomerController(CustomerService service){this.service = service;}
 
     @GetMapping("/customers")
-    public List<CustomerDataTransferObject> showBuildingList(){
-        List<Customer> listBuildings = service.listAll();
-        List<CustomerDataTransferObject> listBDTO = new ArrayList<CustomerDataTransferObject>();
-        for(Customer customer : listBuildings){
-            listBDTO.add(new CustomerDataTransferObject(customer));
+    public ResponseEntity<List<CustomerDataTransferObject>> showBuildingList(){
+        List<Customer> listCustomers = service.listAll();
+        List<CustomerDataTransferObject> listDTO = new ArrayList<CustomerDataTransferObject>();
+        for(Customer customer : listCustomers){
+            listDTO.add(new CustomerDataTransferObject(customer));
         }
-        return listBDTO;
+        return new ResponseEntity<>(listDTO, HttpStatus.OK);
+    }
+    @GetMapping("/customers/{id}")
+    public ResponseEntity<CustomerDataTransferObject> getBuildingById(@PathVariable("id") Integer id) {
+        Customer customer = service.get(id);
+        return new ResponseEntity<>(new CustomerDataTransferObject(customer), HttpStatus.OK);
+    }
+    @PostMapping("/customers")
+    public ResponseEntity<CustomerDataTransferObject> createBuilding(@RequestBody Customer customer) {
+        service.save(customer);
+        return new ResponseEntity<>(new CustomerDataTransferObject(customer), HttpStatus.CREATED);
+    }
+    @PutMapping("/customers/{id}")
+    public ResponseEntity<HttpStatus> updateBuilding(@RequestBody Customer customer) {
+        service.save(customer);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/customers/{id}")
+    public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") Integer id) {
+        try {
+            service.delete(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @DeleteMapping("/customers")
+    public ResponseEntity<HttpStatus> deleteAllTutorials() {
+        try {
+            service.deleteAll();
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

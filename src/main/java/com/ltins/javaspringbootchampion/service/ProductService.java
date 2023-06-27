@@ -42,5 +42,7 @@ public class ProductService {
         }
         repo.deleteById(id);
     }
-
+    public void deleteAll(){
+        repo.deleteAll();
+    }
 }

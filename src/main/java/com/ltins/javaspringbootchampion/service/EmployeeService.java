@@ -41,5 +41,8 @@ public class EmployeeService {
         }
         repo.deleteById(id);
     }
+    public void deleteAll(){
+        repo.deleteAll();
+    }
 
 }
