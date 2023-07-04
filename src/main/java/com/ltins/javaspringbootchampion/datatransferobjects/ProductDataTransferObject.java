@@ -4,27 +4,35 @@ import com.ltins.javaspringbootchampion.entity.Product;
 
 public class ProductDataTransferObject {
     private Integer id;
-    private String buildingAddress;
-    private String providerName;
-    private String productName;
+    private Integer buildingId;
+    private Integer providerId;
+    private String name;
     private Integer availability;
     private Integer price;
 
     public ProductDataTransferObject(Product product){
         this.id = product.getId();
         if(product.getBuilding() == null) {
-            this.buildingAddress = "NONE";
+            this.buildingId = -1;
         }else {
-            this.buildingAddress = product.getBuilding().getAddress();
+            this.buildingId = product.getBuilding().getId();
         }
         if(product.getProvider() == null) {
-            this.providerName = "NONE";
+            this.providerId = -1;
         }else {
-            this.providerName = product.getProvider().getName();;
+            this.providerId = product.getProvider().getId();;
         }
-        this.productName = product.getName();
+        this.name = product.getName();
         this.availability = product.getAvailability();
         this.price = product.getPrice();
+    }
+
+    public ProductDataTransferObject(){
+        this.buildingId = -1;
+        this.providerId = -1;
+        this.name = "Default";
+        this.availability = 1;
+        this.price = 1;
     }
 
     public Integer getId() {
@@ -35,28 +43,28 @@ public class ProductDataTransferObject {
         this.id = id;
     }
 
-    public String getBuildingAddress() {
-        return buildingAddress;
+    public Integer getBuildingId() {
+        return buildingId;
     }
 
-    public void setBuildingAddress(String buildingAddress) {
-        this.buildingAddress = buildingAddress;
+    public void setBuildingId(Integer buildingId) {
+        this.buildingId = buildingId;
     }
 
-    public String getProviderName() {
-        return providerName;
+    public Integer getProviderId() {
+        return providerId;
     }
 
-    public void setProviderName(String providerName) {
-        this.providerName = providerName;
+    public void setProviderId(Integer providerId) {
+        this.providerId = providerId;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setName(String productName) {
+        this.name = productName;
     }
 
     public Integer getAvailability() {

@@ -12,6 +12,11 @@ public class CustomerDataTransferObject {
         this.lastname = customer.getLastname();
     }
 
+    public CustomerDataTransferObject(){
+        this.firstname = "Default";
+        this.lastname = "Default";
+    }
+
     public Integer getId() {
         return id;
     }

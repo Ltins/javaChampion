@@ -12,6 +12,11 @@ public class ProviderDataTransferObject {
         this.country = provider.getCountry();
     }
 
+    public ProviderDataTransferObject(){
+        this.name = "Default";
+        this.country = "Default";
+    }
+
     public Integer getId() {
         return id;
     }

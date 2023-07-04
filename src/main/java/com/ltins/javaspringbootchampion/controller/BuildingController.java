@@ -8,10 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class BuildingController     {
     BuildingService service;
     @Autowired
@@ -32,12 +34,20 @@ public class BuildingController     {
         return new ResponseEntity<>(new BuildingDataTransferObject(building), HttpStatus.OK);
     }
     @PostMapping("/buildings")
-    public ResponseEntity<BuildingDataTransferObject> createBuilding(@RequestBody Building building) {
+    public ResponseEntity<BuildingDataTransferObject> createBuilding(@RequestBody BuildingDataTransferObject buildingTransfer) {
+        Building building = new Building();
+        building.setAddress(buildingTransfer.getAddress());
+        building.setRentDate(Timestamp.valueOf(buildingTransfer.getRentDate() + " 00:00:00"));
+        building.setArea(buildingTransfer.getArea());
         service.save(building);
         return new ResponseEntity<>(new BuildingDataTransferObject(building), HttpStatus.CREATED);
     }
     @PutMapping("/buildings/{id}")
-    public ResponseEntity<HttpStatus> updateBuilding(@RequestBody Building building) {
+    public ResponseEntity<HttpStatus> updateBuilding(@PathVariable("id") Integer id, @RequestBody BuildingDataTransferObject buildingTransfer) {
+        Building building = service.get(id);
+        building.setAddress(buildingTransfer.getAddress());
+        building.setRentDate(Timestamp.valueOf(buildingTransfer.getRentDate()+ " 00:00:00"));
+        building.setArea(buildingTransfer.getArea());
         service.save(building);
         return new ResponseEntity<>(HttpStatus.OK);
     }

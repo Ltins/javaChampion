@@ -14,10 +14,14 @@ public class BuildingDataTransferObject {
     public BuildingDataTransferObject(Building building) {
         this.id = building.getId();
         this.address = building.getAddress();
-        this.rentDate = new SimpleDateFormat("yyyy:MM:dd").format(building.getRentDate());
+        this.rentDate = new SimpleDateFormat("yyyy-mm-dd").format(building.getRentDate());
         this.area = building.getArea();
     }
-
+    public BuildingDataTransferObject() {
+        this.address = "Default";
+        this.rentDate = "2003-03-03";
+        this.area = 1;
+    }
 
     public Integer getId() {
         return id;

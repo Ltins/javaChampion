@@ -6,18 +6,18 @@ import java.text.SimpleDateFormat;
 
 public class SaleDataTransferObject {
     private Integer id;
-    private String customerName;
+    private Integer customerId;
     private Integer paymentId;
-    private String productName;
+    private Integer productId;
     private String purchaseDate;
     private Integer quantity;
 
     public SaleDataTransferObject(Sale sale){
         this.id = sale.getId();
         if(sale.getCustomer() == null) {
-            this.customerName = "NONE";
+            this.customerId = -1;
         }else {
-            this.customerName = sale.getCustomer().getFirstname() + " " + sale.getCustomer().getLastname();
+            this.customerId = sale.getCustomer().getId();
         }
         if(sale.getPayment() == null) {
             this.paymentId = -1;
@@ -25,12 +25,20 @@ public class SaleDataTransferObject {
             this.paymentId = sale.getPayment().getId();
         }
         if(sale.getProduct() == null) {
-            this.productName = "NONE";
+            this.productId = -1;
         }else {
-            this.productName = sale.getProduct().getName();
+            this.productId = sale.getProduct().getId();
         }
-        this.purchaseDate = new SimpleDateFormat("yyyy:MM:dd").format(sale.getPurchaseDate());
+        this.purchaseDate = new SimpleDateFormat("yyyy-mm-dd").format(sale.getPurchaseDate());
         this.quantity = sale.getQuantity();
+    }
+
+    public SaleDataTransferObject(){
+        this.customerId= -1;
+        this.paymentId = -1;
+        this.productId = -1;
+        this.purchaseDate = "2003-03-03";
+        this.quantity = 1;
     }
 
     public Integer getId() {
@@ -41,28 +49,12 @@ public class SaleDataTransferObject {
         this.id = id;
     }
 
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
     public Integer getPaymentId() {
         return paymentId;
     }
 
     public void setPaymentId(Integer paymentId) {
         this.paymentId = paymentId;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
     }
 
     public String getPurchaseDate() {
@@ -79,5 +71,21 @@ public class SaleDataTransferObject {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 }

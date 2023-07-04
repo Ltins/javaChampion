@@ -8,10 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class CustomerController     {
     CustomerService service;
     @Autowired
@@ -32,12 +34,18 @@ public class CustomerController     {
         return new ResponseEntity<>(new CustomerDataTransferObject(customer), HttpStatus.OK);
     }
     @PostMapping("/customers")
-    public ResponseEntity<CustomerDataTransferObject> createCustomer(@RequestBody Customer customer) {
+    public ResponseEntity<CustomerDataTransferObject> createCustomer(@RequestBody CustomerDataTransferObject customerTransfer) {
+        Customer customer = new Customer();
+        customer.setFirstname(customerTransfer.getFirstname());
+        customer.setLastname(customerTransfer.getLastname());
         service.save(customer);
         return new ResponseEntity<>(new CustomerDataTransferObject(customer), HttpStatus.CREATED);
     }
     @PutMapping("/customers/{id}")
-    public ResponseEntity<HttpStatus> updateCustomer(@RequestBody Customer customer) {
+    public ResponseEntity<HttpStatus> updateCustomer(@PathVariable("id") Integer id, @RequestBody CustomerDataTransferObject customerTransfer) {
+        Customer customer = new Customer();
+        customer.setFirstname(customerTransfer.getFirstname());
+        customer.setLastname(customerTransfer.getLastname());
         service.save(customer);
         return new ResponseEntity<>(HttpStatus.OK);
     }

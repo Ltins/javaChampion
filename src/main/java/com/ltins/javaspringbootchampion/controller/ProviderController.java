@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class ProviderController     {
     ProviderService service;
     @Autowired
@@ -32,12 +33,18 @@ public class ProviderController     {
         return new ResponseEntity<>(new ProviderDataTransferObject(provider), HttpStatus.OK);
     }
     @PostMapping("/providers")
-    public ResponseEntity<ProviderDataTransferObject> createProvider(@RequestBody Provider provider) {
+    public ResponseEntity<ProviderDataTransferObject> createProvider(@RequestBody ProviderDataTransferObject providerTransfer) {
+        Provider provider = new Provider();
+        provider.setCountry(providerTransfer.getCountry());
+        provider.setName(providerTransfer.getName());
         service.save(provider);
         return new ResponseEntity<>(new ProviderDataTransferObject(provider), HttpStatus.CREATED);
     }
     @PutMapping("/providers/{id}")
-    public ResponseEntity<HttpStatus> updateProvider(@RequestBody Provider provider) {
+    public ResponseEntity<HttpStatus> updateProvider(@PathVariable("id") Integer id, @RequestBody ProviderDataTransferObject providerTransfer) {
+        Provider provider = service.get(id);
+        provider.setCountry(providerTransfer.getCountry());
+        provider.setName(providerTransfer.getName());
         service.save(provider);
         return new ResponseEntity<>(HttpStatus.OK);
     }

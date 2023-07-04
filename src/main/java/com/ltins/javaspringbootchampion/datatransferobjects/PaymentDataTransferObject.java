@@ -6,16 +6,21 @@ import java.text.SimpleDateFormat;
 
 public class PaymentDataTransferObject {
     private Integer id;
-    private String customerName;
+    private Integer customerId;
     private String date;
     public PaymentDataTransferObject(Payment payment){
         this.id = payment.getId();
-        this.date = new SimpleDateFormat("yyyy:MM:dd").format(payment.getDate());
+        this.date = new SimpleDateFormat("yyyy-mm-dd").format(payment.getDate());
         if(payment.getCustomer() == null){
-            this.customerName = "NONE";
+            this.customerId = -1;
         }else{
-            this.customerName = payment.getCustomer().getFirstname() + " " + payment.getCustomer().getLastname();
+            this.customerId = payment.getCustomer().getId();
         }
+    }
+
+    public PaymentDataTransferObject(){
+        this.date = "2003-03-03";
+        this.customerId = -1;
     }
 
     public Integer getId() {
@@ -26,12 +31,12 @@ public class PaymentDataTransferObject {
         this.id = id;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public Integer getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 
     public String getDate() {
