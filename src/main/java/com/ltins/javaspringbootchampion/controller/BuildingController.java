@@ -35,23 +35,19 @@ public class BuildingController     {
     }
     @PostMapping("/buildings")
     public ResponseEntity<BuildingDataTransferObject> createBuilding(@RequestBody BuildingDataTransferObject buildingTransfer) {
-        System.out.println(buildingTransfer);
         Building building = new Building();
         building.setAddress(buildingTransfer.getAddress());
         building.setRentDate(Timestamp.valueOf(buildingTransfer.getRentDate() + " 00:00:00"));
         building.setArea(buildingTransfer.getArea());
-        System.out.println(building);
         service.save(building);
         return new ResponseEntity<>(new BuildingDataTransferObject(building), HttpStatus.CREATED);
     }
     @PutMapping("/buildings/{id}")
     public ResponseEntity<HttpStatus> updateBuilding(@PathVariable("id") Integer id, @RequestBody BuildingDataTransferObject buildingTransfer) {
-        System.out.println(buildingTransfer);
         Building building = service.get(id);
         building.setAddress(buildingTransfer.getAddress());
         building.setRentDate(Timestamp.valueOf(buildingTransfer.getRentDate()+ " 00:00:00"));
         building.setArea(buildingTransfer.getArea());
-        System.out.println(building);
         service.save(building);
         return new ResponseEntity<>(HttpStatus.OK);
     }
