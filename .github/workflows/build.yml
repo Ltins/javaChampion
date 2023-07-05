@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - master
-      - reactChampion
+      - reactChampion-*
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
