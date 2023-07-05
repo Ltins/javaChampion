@@ -1,7 +1,6 @@
 import { Employee } from "../entity/Employee";
 import { useState } from "react";
 import { Fragment } from "react";
-import Button from "./Button";
 
 interface EmployeeTableProps {
   employees: Employee[];
@@ -12,8 +11,6 @@ function EmployeeTable({ employees, onSelectItem }: EmployeeTableProps) {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   return (
     <>
-      <h1>Employees</h1>
-      <h2><Button children = "Add new employee" onClick={() => {}}/></h2>
       <table className="table table-striped">
         <thead>
           <tr>
@@ -26,7 +23,7 @@ function EmployeeTable({ employees, onSelectItem }: EmployeeTableProps) {
           </tr>
         </thead>
         <tbody>
-          {employees.map((employee, index, j) => {
+          {employees.map((employee, index) => {
             return (
               <Fragment key={index}>
                 <tr

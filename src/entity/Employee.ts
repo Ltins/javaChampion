@@ -5,7 +5,6 @@ export class Employee {
   salary: number | undefined;
   jobTitle: string = "";
   buildingAddress: string = "";
-  isActive: boolean = false;
   get isNew(): boolean {
     return this.id === undefined;
   }
@@ -19,6 +18,5 @@ export class Employee {
     if (initializer.jobTitle) this.jobTitle = initializer.jobTitle;
     if (initializer.buildingAddress)
       this.buildingAddress = initializer.buildingAddress;
-    if (initializer.isActive) this.isActive = initializer.isActive;
   }
 }

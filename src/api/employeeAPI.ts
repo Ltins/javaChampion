@@ -1,15 +1,15 @@
-import { Employee } from '../entity/Employee';
-const baseUrl = 'http://localhost:8080';
-const url = `${baseUrl}/employees`; 
+import { Employee } from "../entity/Employee";
+const baseUrl = "http://localhost:8080";
+const url = `${baseUrl}/employees`;
 
 function translateStatusToErrorMessage(status: number) {
   switch (status) {
     case 401:
-      return 'Please login again.';
+      return "Please login again.";
     case 403:
-      return 'You do not have permission to view the employee(s).';
+      return "You do not have permission to view the employee(s).";
     default:
-      return 'There was an error retrieving the employee(s). Please try again.';
+      return "There was an error retrieving the employee(s). Please try again.";
   }
 }
 
@@ -39,12 +39,12 @@ function delay(ms: number) {
   };
 }
 
-function convertToProjectModels(data: any[]): Employee[] {
-  let employees: Employee[] = data.map(convertToProjectModel);
+function convertToEmployeeModels(data: any[]): Employee[] {
+  let employees: Employee[] = data.map(convertToEmployeeModel);
   return employees;
 }
 
-function convertToProjectModel(item: any): Employee {
+function convertToEmployeeModel(item: any): Employee {
   return new Employee(item);
 }
 
@@ -54,11 +54,11 @@ const employeeAPI = {
       .then(delay(600))
       .then(checkStatus)
       .then(parseJSON)
-      .then(convertToProjectModels)
+      .then(convertToEmployeeModels)
       .catch((error: TypeError) => {
-        console.log('log client error ' + error);
+        console.log("log client error " + error);
         throw new Error(
-          'There was an error retrieving the employees. Please try again.'
+          "There was an error retrieving the employees. Please try again."
         );
       });
   },

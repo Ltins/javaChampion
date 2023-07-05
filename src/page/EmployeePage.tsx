@@ -1,7 +1,8 @@
 import { Fragment, useState, useEffect } from "react";
 import { Employee } from "../entity/Employee";
 import { employeeAPI } from "../api/employeeAPI";
-import EmployeeTable from "../components/EmployeeTable";
+import EmployeeTable from "../table/EmployeeTable";
+import Button from "./../components/Button";
 
 interface EmployeePageProps {
   projects: Employee[];
@@ -13,6 +14,11 @@ function EmployeePage() {
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | undefined>(undefined);
+  const [isEditing, setEditing] = useState(false);
+
+  const handleUpdateClick = () => {
+    setEditing((isEditing) => !isEditing);
+  };
 
   useEffect(() => {
     async function loadEmployees() {
@@ -33,6 +39,10 @@ function EmployeePage() {
   }, []);
   return (
     <>
+      <h1>Buildings</h1>
+      <h2>
+        <Button children="Add new building" onClick={() => {}} />
+      </h2>
       <EmployeeTable employees={employees} onSelectItem={() => {}} />
       {loading && (
         <div className="center-page">
