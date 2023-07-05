@@ -25,7 +25,7 @@ public class Sale {
     @JoinColumn(name = "customer_id", nullable = true)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JsonIgnore
-    private Customer Customer;
+    private Customer сustomer;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "product_id", nullable = true)
@@ -56,11 +56,11 @@ public class Sale {
     }
 
     public com.ltins.javaspringbootchampion.entity.Customer getCustomer() {
-        return Customer;
+        return сustomer;
     }
 
     public void setCustomer(com.ltins.javaspringbootchampion.entity.Customer customer) {
-        Customer = customer;
+        this.сustomer = customer;
     }
 
     public Product getProduct() {
@@ -92,7 +92,7 @@ public class Sale {
         return "Sale{" +
                 "id=" + id +
                 ", payment=" + payment +
-                ", Customer=" + Customer +
+                ", сustomer=" + сustomer +
                 ", product=" + product +
                 ", purchaseDate=" + purchaseDate +
                 ", quantity=" + quantity +

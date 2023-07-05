@@ -14,17 +14,17 @@ import java.util.Optional;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(false)
-public class BuildingRepositoryTest {
+class BuildingRepositoryTest {
 
     private BuildingRepository repo;
 
     @Autowired
-    public BuildingRepositoryTest(BuildingRepository repo){
+    BuildingRepositoryTest(BuildingRepository repo){
         this.repo = repo;
     }
 
     @Test
-    public void testAddNew(){
+    void testAddNew(){
             Building building = new Building();
             building.setAddress("Krasivsk 305");
             building.setArea(69);
@@ -33,11 +33,11 @@ public class BuildingRepositoryTest {
             Building savedBuilding = repo.save(building);
 
             Assertions.assertThat(savedBuilding).isNotNull();
-            Assertions.assertThat(savedBuilding.getId()).isGreaterThan(0);
+            Assertions.assertThat(savedBuilding.getId()).isPositive();
 
     }
     @Test
-    public void testListAll(){
+    void testListAll(){
       Iterable<Building> buildings = repo.findAll();
       Assertions.assertThat(buildings).hasSizeGreaterThan(0);
 
@@ -46,7 +46,7 @@ public class BuildingRepositoryTest {
          }
      }
     @Test
-    public void testUpdate(){
+    void testUpdate(){
         Integer buildingId = 6;
         Optional<Building> optionalBuilding = repo.findById(buildingId);
         Building building = optionalBuilding.get();
@@ -57,7 +57,7 @@ public class BuildingRepositoryTest {
         Assertions.assertThat(updatedBuilding.getAddress()).isEqualTo("Changed");
      }
     @Test
-    public void deleteByID(){
+    void deleteByID(){
         Integer buildingId = 4;
         repo.deleteById(buildingId);
 

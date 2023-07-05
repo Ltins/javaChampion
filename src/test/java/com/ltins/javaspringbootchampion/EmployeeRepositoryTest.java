@@ -14,16 +14,16 @@ import java.util.Optional;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(false)
-public class EmployeeRepositoryTest {
+class EmployeeRepositoryTest {
     private EmployeeRepository repo;
 
     @Autowired
-    public EmployeeRepositoryTest(EmployeeRepository repo){
+     EmployeeRepositoryTest(EmployeeRepository repo){
         this.repo = repo;
     }
 
     @Test
-    public void testAddNew(){
+     void testAddNew(){
         Employee employee = new Employee();
         employee.setName("Nikitka");
         employee.setHireDate(new Timestamp(5000));
@@ -34,10 +34,10 @@ public class EmployeeRepositoryTest {
         Employee savedEmployee = repo.save(employee);
 
         Assertions.assertThat(savedEmployee).isNotNull();
-        Assertions.assertThat(savedEmployee.getId()).isGreaterThan(0);
+        Assertions.assertThat(savedEmployee.getId()).isPositive();
     }
     @Test
-    public void testListAll(){
+     void testListAll(){
         Iterable<Employee> employees = repo.findAll();
         Assertions.assertThat(employees).hasSizeGreaterThan(0);
 
@@ -46,7 +46,7 @@ public class EmployeeRepositoryTest {
         }
     }
     @Test
-    public void testUpdate(){
+     void testUpdate(){
         Integer employeeId = 4;
         Optional<Employee> optionalEmployee = repo.findById(employeeId);
         Employee employee = optionalEmployee.get();
@@ -58,7 +58,7 @@ public class EmployeeRepositoryTest {
         Assertions.assertThat(updatedEmployee.getName()).isEqualTo("Oleg");
     }
     @Test
-    public void deleteByID(){
+     void deleteByID(){
         Integer employeeId = 5;
         repo.deleteById(employeeId);
 

@@ -20,7 +20,7 @@ public class ProductDataTransferObject {
         if(product.getProvider() == null) {
             this.providerId = -1;
         }else {
-            this.providerId = product.getProvider().getId();;
+            this.providerId = product.getProvider().getId();
         }
         this.name = product.getName();
         this.availability = product.getAvailability();
@@ -81,5 +81,17 @@ public class ProductDataTransferObject {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductDataTransferObject{" +
+                "id=" + id +
+                ", buildingId=" + buildingId +
+                ", providerId=" + providerId +
+                ", name='" + name + '\'' +
+                ", availability=" + availability +
+                ", price=" + price +
+                '}';
     }
 }

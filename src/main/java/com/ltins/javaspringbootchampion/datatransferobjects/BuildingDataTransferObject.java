@@ -14,7 +14,7 @@ public class BuildingDataTransferObject {
     public BuildingDataTransferObject(Building building) {
         this.id = building.getId();
         this.address = building.getAddress();
-        this.rentDate = new SimpleDateFormat("yyyy-mm-dd").format(building.getRentDate());
+        this.rentDate = new SimpleDateFormat("yyyy-MM-dd").format(building.getRentDate());
         this.area = building.getArea();
     }
     public BuildingDataTransferObject() {
@@ -53,5 +53,15 @@ public class BuildingDataTransferObject {
 
     public void setArea(Integer area) {
         this.area = area;
+    }
+
+    @Override
+    public String toString() {
+        return "BuildingDataTransferObject{" +
+                "id=" + id +
+                ", address='" + address + '\'' +
+                ", rentDate='" + rentDate + '\'' +
+                ", area=" + area +
+                '}';
     }
 }

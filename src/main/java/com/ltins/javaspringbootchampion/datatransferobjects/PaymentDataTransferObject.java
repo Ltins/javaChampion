@@ -10,7 +10,7 @@ public class PaymentDataTransferObject {
     private String date;
     public PaymentDataTransferObject(Payment payment){
         this.id = payment.getId();
-        this.date = new SimpleDateFormat("yyyy-mm-dd").format(payment.getDate());
+        this.date = new SimpleDateFormat("yyyy-MM-dd").format(payment.getDate());
         if(payment.getCustomer() == null){
             this.customerId = -1;
         }else{
@@ -45,5 +45,14 @@ public class PaymentDataTransferObject {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "PaymentDataTransferObject{" +
+                "id=" + id +
+                ", customerId=" + customerId +
+                ", date='" + date + '\'' +
+                '}';
     }
 }

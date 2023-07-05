@@ -15,7 +15,7 @@ public class EmployeeDataTransferObject {
     public EmployeeDataTransferObject(Employee employee){
         this.id = employee.getId();
         this.name = employee.getName();
-        this.hireDate = new SimpleDateFormat("yyyy-mm-dd").format(employee.getHireDate());
+        this.hireDate = new SimpleDateFormat("yyyy-MM-dd").format(employee.getHireDate());
         this.salary = employee.getSalary();
         this.jobTitle = employee.getJobTitle();
         if(employee.getBuilding() == null) {
@@ -79,5 +79,17 @@ public class EmployeeDataTransferObject {
 
     public void setBuildingId(Integer buildingId) {
         this.buildingId = buildingId;
+    }
+
+    @Override
+    public String toString() {
+        return "EmployeeDataTransferObject{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", hireDate='" + hireDate + '\'' +
+                ", salary=" + salary +
+                ", jobTitle='" + jobTitle + '\'' +
+                ", buildingId=" + buildingId +
+                '}';
     }
 }

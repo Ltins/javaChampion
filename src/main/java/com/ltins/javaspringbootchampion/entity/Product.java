@@ -26,7 +26,7 @@ public class Product {
     private Building building;
 
     @Column(length = 255, nullable = false, name = "product_name", columnDefinition="VARCHAR(255) UNIQUE", unique = true)
-    private String Name;
+    private String name;
 
     @Column(name = "availability", columnDefinition="INT DEFAULT 1000")
     private Integer availability;
@@ -59,11 +59,11 @@ public class Product {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public Integer getAvailability() {
@@ -88,7 +88,7 @@ public class Product {
                 "id=" + id +
                 ", provider=" + provider +
                 ", building=" + building +
-                ", Name='" + Name + '\'' +
+                ", name='" + name + '\'' +
                 ", availability=" + availability +
                 ", price=" + price +
                 '}';

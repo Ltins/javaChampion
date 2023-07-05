@@ -29,7 +29,7 @@ public class SaleDataTransferObject {
         }else {
             this.productId = sale.getProduct().getId();
         }
-        this.purchaseDate = new SimpleDateFormat("yyyy-mm-dd").format(sale.getPurchaseDate());
+        this.purchaseDate = new SimpleDateFormat("yyyy-MM-dd").format(sale.getPurchaseDate());
         this.quantity = sale.getQuantity();
     }
 
@@ -87,5 +87,17 @@ public class SaleDataTransferObject {
 
     public void setProductId(Integer productId) {
         this.productId = productId;
+    }
+
+    @Override
+    public String toString() {
+        return "SaleDataTransferObject{" +
+                "id=" + id +
+                ", customerId=" + customerId +
+                ", paymentId=" + paymentId +
+                ", productId=" + productId +
+                ", purchaseDate='" + purchaseDate + '\'' +
+                ", quantity=" + quantity +
+                '}';
     }
 }
